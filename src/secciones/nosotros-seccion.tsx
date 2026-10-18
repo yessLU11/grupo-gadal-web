@@ -9,6 +9,7 @@ import { LlamadoAccion } from "@/secciones/llamado-accion";
 import { Play, X, MapPin, Clock, ShieldCheck, Award, FileCheck, CheckCircle2 } from "lucide-react";
 import { EncabezadoSeccion } from "@/components/EncabezadoSeccion";
 import { DATOS_EMPRESA } from "@/lib/constantes-empresa";
+import { ContadorDinamico } from "@/components/ContadorDinamico";
 
 export function NosotrosSeccion() {
   const [mostrarVideo, setMostrarVideo] = useState(false);
@@ -66,6 +67,34 @@ export function NosotrosSeccion() {
               <p className="text-sm sm:text-base text-zinc-700 leading-relaxed font-normal">
                 Somos una empresa dedicada al alquiler de maquinaria pesada para los sectores de minería y construcción. Nos diferenciamos por responder en menos tiempo, acompañar de cerca a nuestros operadores y clientes, y mantener costos accesibles sin sacrificar confiabilidad ni seguridad operativa.
               </p>
+
+              {/* Métricas con Contadores Numéricos Dinámicos */}
+              <div className="grid grid-cols-3 gap-3 pt-4 border-t border-zinc-100">
+                <div className="bg-[#FAAE34]/10 rounded-xl p-3 text-center border border-[#FAAE34]/20">
+                  <span className="block text-xl sm:text-2xl font-black text-[#21272A] font-mono">
+                    <ContadorDinamico valorFinal={100} sufijo="%" />
+                  </span>
+                  <span className="text-[11px] sm:text-xs font-semibold text-zinc-600 block mt-0.5">
+                    Disponibilidad Operativa
+                  </span>
+                </div>
+                <div className="bg-[#FAAE34]/10 rounded-xl p-3 text-center border border-[#FAAE34]/20">
+                  <span className="block text-xl sm:text-2xl font-black text-[#21272A] font-mono">
+                    <ContadorDinamico valorFinal={24} prefijo="+" sufijo=" Deptos" />
+                  </span>
+                  <span className="text-[11px] sm:text-xs font-semibold text-zinc-600 block mt-0.5">
+                    Cobertura Nacional
+                  </span>
+                </div>
+                <div className="bg-[#FAAE34]/10 rounded-xl p-3 text-center border border-[#FAAE34]/20">
+                  <span className="block text-xl sm:text-2xl font-black text-[#21272A] font-mono">
+                    <ContadorDinamico valorFinal={2} sufijo="h" />
+                  </span>
+                  <span className="text-[11px] sm:text-xs font-semibold text-zinc-600 block mt-0.5">
+                    Respuesta Comercial
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -100,7 +129,7 @@ export function NosotrosSeccion() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Tarjeta Misión */}
-            <div className="bg-white rounded-2xl p-8 sm:p-10 shadow-sm border border-[#FAAE34]/20 flex flex-col justify-between">
+            <div className="bg-white rounded-2xl p-8 sm:p-10 shadow-sm border border-[#FAAE34]/20 flex flex-col justify-between tarjeta-maquinaria-elevacion">
               <div>
                 <h3 className="text-xl sm:text-2xl font-extrabold text-[#21272A] mb-3">
                   Nuestra Misión
@@ -112,7 +141,7 @@ export function NosotrosSeccion() {
             </div>
 
             {/* Tarjeta Visión */}
-            <div className="bg-white rounded-2xl p-8 sm:p-10 shadow-sm border border-[#FAAE34]/20 flex flex-col justify-between">
+            <div className="bg-white rounded-2xl p-8 sm:p-10 shadow-sm border border-[#FAAE34]/20 flex flex-col justify-between tarjeta-maquinaria-elevacion">
               <div>
                 <h3 className="text-xl sm:text-2xl font-extrabold text-[#21272A] mb-3">
                   Nuestra Visión
@@ -126,7 +155,7 @@ export function NosotrosSeccion() {
         </div>
       </section>
 
-      {/* 4. POR QUÉ ELEGIRNOS (5 TARJETAS) */}
+      {/* 4. POR QUÉ ELEGIRNOS (5 TARJETAS CON APARICIÓN EN CASCADA / ELEVACIÓN) */}
       <section className="py-16 sm:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-2 mb-10">
@@ -138,26 +167,37 @@ export function NosotrosSeccion() {
             </h2>
           </div>
 
-          {/* Grid de 5 tarjetas en bg-[#FAAE34]/15 */}
+          {/* Grid de 5 tarjetas en bg-[#FAAE34]/15 con retardo escalonado y elevación industrial */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5">
-            {PUNTOS_POR_QUE_ELEGIRNOS.map((punto) => (
-              <div
-                key={punto.numero}
-                className="bg-[#FAAE34]/15 rounded-2xl p-5 sm:p-6 flex flex-col justify-between border border-[#FAAE34]/30 shadow-xs hover:border-[#FAAE34] transition-all"
-              >
-                <div>
-                  <span className="text-xl sm:text-2xl font-black text-[#FAAE34] block mb-3 font-mono">
-                    {punto.numero}
-                  </span>
-                  <h3 className="text-sm sm:text-base font-bold text-[#21272A] mb-2 leading-snug">
-                    {punto.titulo}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-normal">
-                    {punto.descripcion}
-                  </p>
+            {PUNTOS_POR_QUE_ELEGIRNOS.map((punto, index) => {
+              const retardos = [
+                "transition-all duration-300 delay-100",
+                "transition-all duration-300 delay-200",
+                "transition-all duration-300 delay-300",
+                "transition-all duration-300 delay-400",
+                "transition-all duration-300 delay-500",
+              ];
+              return (
+                <div
+                  key={punto.numero}
+                  className={`bg-[#FAAE34]/15 rounded-2xl p-5 sm:p-6 flex flex-col justify-between border border-[#FAAE34]/30 shadow-xs tarjeta-maquinaria-elevacion ${
+                    retardos[index % retardos.length]
+                  }`}
+                >
+                  <div>
+                    <span className="text-xl sm:text-2xl font-black text-[#FAAE34] block mb-3 font-mono">
+                      {punto.numero}
+                    </span>
+                    <h3 className="text-sm sm:text-base font-bold text-[#21272A] mb-2 leading-snug">
+                      {punto.titulo}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-normal">
+                      {punto.descripcion}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -179,7 +219,7 @@ export function NosotrosSeccion() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
             {/* Card 1: ISO 9001 */}
-            <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-xl border border-amber-200/50 hover:-translate-y-1 transition-all duration-300 group flex flex-col justify-between">
+            <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-xl border border-amber-200/50 tarjeta-maquinaria-elevacion group flex flex-col justify-between">
               <div>
                 <div className="relative h-48 w-full rounded-xl overflow-hidden mb-4 bg-zinc-100">
                   <Image
@@ -208,7 +248,7 @@ export function NosotrosSeccion() {
             </div>
 
             {/* Card 2: ISO 45001 */}
-            <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-xl border border-amber-200/50 hover:-translate-y-1 transition-all duration-300 group flex flex-col justify-between">
+            <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-xl border border-amber-200/50 tarjeta-maquinaria-elevacion group flex flex-col justify-between">
               <div>
                 <div className="relative h-48 w-full rounded-xl overflow-hidden mb-4 bg-zinc-100">
                   <Image
@@ -237,7 +277,7 @@ export function NosotrosSeccion() {
             </div>
 
             {/* Card 3: Estándares HSE */}
-            <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-xl border border-amber-200/50 hover:-translate-y-1 transition-all duration-300 group flex flex-col justify-between">
+            <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-xl border border-amber-200/50 tarjeta-maquinaria-elevacion group flex flex-col justify-between">
               <div>
                 <div className="relative h-48 w-full rounded-xl overflow-hidden mb-4 bg-zinc-100">
                   <Image

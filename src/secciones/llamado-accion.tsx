@@ -25,7 +25,7 @@ export function LlamadoAccion() {
         <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
             href="/carrito"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-[#FAAE34] hover:bg-[#e99e28] text-[#21272A] font-extrabold text-sm transition-all shadow-lg active:scale-95"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-[#FAAE34] text-[#21272A] font-extrabold text-sm btn-piston-hidraulico shadow-lg active:scale-95"
           >
             <ClipboardList className="w-5 h-5" />
             Solicitar Cotización

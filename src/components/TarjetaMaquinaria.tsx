@@ -25,7 +25,7 @@ export function TarjetaMaquinaria({ maquinaria }: PropsTarjeta) {
   };
 
   return (
-    <div className="group rounded-xl border border-zinc-200/90 bg-white shadow-sm hover:shadow-md hover:border-[#FAAE34]/80 transition-all duration-200 flex flex-col overflow-hidden">
+    <div className="group rounded-xl border border-zinc-200/90 bg-white shadow-sm tarjeta-maquinaria-elevacion flex flex-col overflow-hidden">
       {/* Contenedor de Imagen */}
       <div className="relative w-full h-52 sm:h-56 bg-zinc-100 overflow-hidden">
         <Image

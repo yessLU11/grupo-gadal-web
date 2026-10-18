@@ -69,7 +69,7 @@ export function BarraNavegacion() {
                 <Link
                   key={enlace.ruta}
                   href={enlace.ruta}
-                  className={`text-[15px] font-medium transition-colors relative py-1 ${
+                  className={`text-[15px] font-medium transition-colors relative py-1 nav-linea-industrial ${
                     activo ? "text-[#FAAE34] font-bold" : "text-zinc-200 hover:text-[#FAAE34]"
                   }`}
                 >
@@ -101,7 +101,7 @@ export function BarraNavegacion() {
             {/* CTA Cotizar Flota */}
             <Link
               href="/carrito"
-              className="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-lg bg-[#FAAE34] text-[#21272A] font-extrabold text-sm hover:bg-[#e99e28] transition-colors shadow-sm"
+              className="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-lg bg-[#FAAE34] text-[#21272A] font-extrabold text-sm btn-piston-hidraulico shadow-sm"
             >
               Cotizar Flota
             </Link>

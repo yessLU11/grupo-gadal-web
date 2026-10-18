@@ -264,7 +264,7 @@ return (
                   </p>
                   <button
                     onClick={limpiarFiltros}
-                    className="px-4 py-2 rounded-lg bg-[#FAAE34] text-[#21272A] font-bold text-xs"
+                    className="px-4 py-2 rounded-lg bg-[#FAAE34] text-[#21272A] font-bold text-xs btn-piston-hidraulico shadow-sm"
                   >
                     Restablecer todos los filtros
                   </button>
@@ -283,8 +283,8 @@ return (
                 </div>
                 
                 <Link
-                  href="/contacto" // Cambia esta ruta a la URL exacta de tu sección/página de contacto
-                  className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#FAAE34] hover:bg-[#e99e28] text-[#21272A] font-extrabold text-sm whitespace-nowrap shadow-sm transition-colors"
+                  href="/contacto"
+                  className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#FAAE34] text-[#21272A] font-extrabold text-sm whitespace-nowrap shadow-sm btn-piston-hidraulico"
                 >
                   <ClipboardList className="w-5 h-5" />
                   Consultar Ahora

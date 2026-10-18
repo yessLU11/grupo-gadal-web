@@ -103,7 +103,7 @@ export function ProyectosSeccion() {
             {sectores.map((s, idx) => (
               <div
                 key={idx}
-                className="p-8 rounded-2xl border border-zinc-200 bg-white shadow-sm hover:border-[#FAAE34] transition-all space-y-4"
+                className="p-8 rounded-2xl border border-zinc-200 bg-white shadow-sm tarjeta-maquinaria-elevacion space-y-4"
               >
                 <div className="w-14 h-14 rounded-xl bg-[#F9F2E6] flex items-center justify-center">
                   {s.icono}
@@ -211,7 +211,7 @@ export function ProyectosSeccion() {
           <div className="mt-14 text-center">
             <Link
               href="/carrito"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-[#FAAE34] hover:bg-[#e99e28] text-[#21272A] font-bold text-sm shadow-sm transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-[#FAAE34] text-[#21272A] font-bold text-sm shadow-sm btn-piston-hidraulico"
             >
               Solicitar Cotización para su Proyecto
               <ArrowRight className="w-4 h-4" />

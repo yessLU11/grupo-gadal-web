@@ -127,11 +127,134 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
   }
   html {
     @apply font-sans;
   }
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight font-sans;
+  }
+}
+
+/* ==========================================================================
+   ESTILOS E IDENTIDAD INDUSTRIAL - GRUPO GADAL S.A.C.
+   ========================================================================== */
+
+/* 1. Efecto "Llenado de Tanque / Pistón Hidráulico" en botones */
+.btn-piston-hidraulico {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-piston-hidraulico::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #e99e28;
+  transform: translateX(-101%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
+
+.btn-piston-hidraulico:hover::before {
+  transform: translateX(0);
+}
+
+/* Variante oscuro para botones secundarios */
+.btn-piston-oscuro {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-piston-oscuro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #FAAE34;
+  transform: translateX(-101%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
+
+.btn-piston-oscuro:hover::before {
+  transform: translateX(0);
+}
+
+/* 2. Línea de Enfoque Industrial en Menú de Navegación */
+.nav-linea-industrial {
+  position: relative;
+}
+
+.nav-linea-industrial::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2.5px;
+  background-color: #FAAE34;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-linea-industrial:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* 3. Elevación con Sombra de Maquinaria Pesada */
+.tarjeta-maquinaria-elevacion {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tarjeta-maquinaria-elevacion:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.12), 0 10px 15px -5px rgba(250, 174, 52, 0.2);
+  border-color: rgba(250, 174, 52, 0.6) !important;
+}
+
+/* 4. Animaciones de Engranaje y Maquinaria */
+@keyframes rotacion-engranaje {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animacion-engranaje {
+  animation: rotacion-engranaje 4s linear infinite;
+}
+
+.animacion-engranaje-reversa {
+  animation: rotacion-engranaje 4s linear infinite reverse;
+}
+
+/* Animación de desplazamiento sutil para tractor / flota */
+@keyframes avance-tractor {
+  0% {
+    transform: translateX(-40px);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animacion-avance-tractor {
+  animation: avance-tractor 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes marquee {

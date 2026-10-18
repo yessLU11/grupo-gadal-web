@@ -67,14 +67,14 @@ export function HeroInicio() {
           <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
             <Link
               href="/equipos"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-[#FAAE34] hover:bg-[#e99e28] text-[#21272A] font-extrabold text-sm transition-all shadow-md active:scale-95"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-[#FAAE34] text-[#21272A] font-extrabold text-sm btn-piston-hidraulico shadow-md active:scale-95"
             >
               Explorar Catálogo
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               href="/contacto"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg border border-zinc-600 hover:border-[#FAAE34] text-white hover:text-[#FAAE34] font-bold text-sm bg-zinc-800/60 transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg border border-zinc-600 text-white font-bold text-sm bg-zinc-800/60 btn-piston-oscuro hover:text-[#21272A]"
             >
               Solicitar Cotización Rápida
               <ChevronRight className="w-4 h-4" />

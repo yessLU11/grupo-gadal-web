@@ -5,6 +5,7 @@ import { BarraContacto } from "@/components/BarraContacto";
 import { BarraNavegacion } from "@/components/BarraNavegacion";
 import { PiePagina } from "@/components/PiePagina";
 import { BotonWhatsApp } from "@/components/BotonWhatsApp";
+import { NotificacionCotizarFlotante } from "@/components/NotificacionCotizarFlotante";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -25,12 +26,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className={`${inter.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-sans bg-white text-[#21272A]">
+      <body className={`${inter.className} min-h-full flex flex-col font-sans bg-white text-[#21272A]`}>
         <BarraContacto />
         <BarraNavegacion />
         <main className="flex-1">{children}</main>
         <PiePagina />
         <BotonWhatsApp />
+        <NotificacionCotizarFlotante />
       </body>
     </html>
   );
