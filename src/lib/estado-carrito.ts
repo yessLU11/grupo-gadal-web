@@ -3,14 +3,9 @@
 
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import { Maquinaria } from "./datos-mock";
+import type { Maquinaria, ItemCotizacion, TipoOperacion } from "@/types";
 
-export interface ItemCotizacion {
-  id: string; // id único del item
-  maquinaria: Maquinaria;
-  cantidad: number;
-  tipoOperacion: "Alquiler" | "Compra";
-}
+export type { ItemCotizacion };
 
 interface EstadoCarrito {
   items: ItemCotizacion[];

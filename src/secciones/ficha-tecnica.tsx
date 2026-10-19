@@ -4,9 +4,11 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Maquinaria, LISTA_MAQUINARIAS } from "@/lib/datos-mock";
+import type { Maquinaria } from "@/types";
+import { LISTA_MAQUINARIAS } from "@/lib/datos-mock";
 import { useCarritoStore } from "@/lib/estado-carrito";
 import { TarjetaMaquinaria } from "@/components/TarjetaMaquinaria";
+import { MiniVehiculosAnimados } from "@/components/ui/MiniVehiculosAnimados";
 import { Badge } from "@/components/ui/badge";
 import {
   ChevronRight,
@@ -59,6 +61,8 @@ export function FichaTecnica({ maquinaria }: PropsFicha) {
           <ChevronRight className="w-3.5 h-3.5" />
           <span className="font-bold text-[#21272A]">{maquinaria.nombre}</span>
         </nav>
+
+        <MiniVehiculosAnimados className="mb-6" />
 
         {/* Bloque Superior: Galería y Acciones de Cotización */}
         <div className="bg-white rounded-2xl border border-zinc-200 p-6 sm:p-8 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { LISTA_MAQUINARIAS } from "@/lib/datos-mock";
 import { TarjetaMaquinaria } from "@/components/TarjetaMaquinaria";
+import { MiniVehiculosAnimados } from "@/components/ui/MiniVehiculosAnimados";
 import { Input } from "@/components/ui/input";
 import {
   Search,
@@ -173,6 +174,7 @@ return (
         subtitulo="Filtre por sector o tipo de equipo para encontrar la maquinaria que su frente de trabajo requiere."
         imagen="/images/encabezado/encabezado-equipos.jpg"
       />
+      <MiniVehiculosAnimados className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" />
 
       {/* FONDO DE LA SECCIÓN GRIS */}
       <div className="bg-zinc-100 py-10 sm:py-14 min-h-screen">

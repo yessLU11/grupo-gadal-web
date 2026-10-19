@@ -4,7 +4,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Maquinaria } from "@/lib/datos-mock";
+import type { Maquinaria } from "@/types";
 import { useCarritoStore } from "@/lib/estado-carrito";
 import { Badge } from "@/components/ui/badge";
 import { Check, Plus, Eye, Zap, Scale, Layers } from "lucide-react";
