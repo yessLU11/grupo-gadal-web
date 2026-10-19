@@ -1,6 +1,7 @@
 // src/secciones/proyectos-seccion.tsx
 import React from "react";
 import { EncabezadoSeccion } from "@/components/EncabezadoSeccion";
+import { MiniVehiculosAnimados } from "@/components/ui/MiniVehiculosAnimados";
 import Link from "next/link";
 import { ArrowRight, Mountain, HardHat, Compass, Droplet, CheckCircle, ShieldCheck } from "lucide-react";
 
@@ -83,6 +84,7 @@ export function ProyectosSeccion() {
         subtitulo="Descubra los sectores productivos que impulsamos con nuestra maquinaria y la forma estructurada en que garantizamos el cumplimiento de cada entrega."
         imagen="/images/encabezado/encabezado-proyectos.jpg"
       />
+      <MiniVehiculosAnimados className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" />
 
       {/* Sectores Atendidos */}
       <section className="py-16 sm:py-20">

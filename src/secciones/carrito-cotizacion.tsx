@@ -4,7 +4,8 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useCarritoStore, ItemCotizacion } from "@/lib/estado-carrito";
+import { useCarritoStore } from "@/lib/estado-carrito";
+import type { ItemCotizacion } from "@/types";
 import {
   FormularioCotizacion,
   DatosFormularioCotizacion,

@@ -3,7 +3,8 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { LISTA_TESTIMONIOS, Testimonio } from "@/lib/datos-mock";
+import { LISTA_TESTIMONIOS } from "@/lib/datos-mock";
+import type { Testimonio } from "@/types";
 import { ChevronLeft, ChevronRight, Star, Zap } from "lucide-react";
 
 // Logos referenciales de clientes para el banner móvil (Ticker / Marquee)

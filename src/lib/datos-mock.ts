@@ -1,36 +1,22 @@
 // src/lib/datos-mock.ts
 // Datos de prueba para el sitio web B2B de GRUPO GADAL
 
-export interface Maquinaria {
-  id: string;
-  slug: string;
-  nombre: string;
-  categoria: string;
-  marca: string;
-  modelo: string;
-  año: number;
-  sector: "Minería" | "Construcción" | "Movimiento de Tierras" | "Obras Viales";
-  capacidad: string;
-  potenciaHp: number;
-  pesoOperativoKg: number;
-  imagenPrincipal: string;
-  galeria: string[];
-  descripcionCorta: string;
-  descripcionCompleta: string;
-  disponible: boolean;
-  destacado: boolean;
-  especificaciones: {
-    motor: string;
-    potenciaBruta: string;
-    pesoOperativo: string;
-    capacidadCuchara: string;
-    profundidadExcavacion?: string;
-    velocidadDesplazamiento?: string;
-    combustible: string;
-    dimensionesTransporte: string;
-  };
-  aplicaciones: string[];
-}
+import type {
+  Maquinaria,
+  Servicio,
+  PreguntaFrecuente,
+  Testimonio,
+  ArticuloBlog,
+} from "@/types";
+
+export type {
+  Maquinaria,
+  Servicio,
+  PreguntaFrecuente,
+  Testimonio,
+  ArticuloBlog,
+};
+
 
 export const LISTA_MAQUINARIAS: Maquinaria[] = [
   {
@@ -233,14 +219,6 @@ export const LISTA_MAQUINARIAS: Maquinaria[] = [
   }
 ];
 
-export interface Servicio {
-  id: string;
-  titulo: string;
-  subtitulo: string;
-  descripcion: string;
-  icono: string;
-}
-
 export const LISTA_SERVICIOS: Servicio[] = [
   {
     id: "alquiler-flota",
@@ -301,12 +279,6 @@ export const PUNTOS_POR_QUE_ELEGIRNOS = [
   }
 ];
 
-export interface PreguntaFrecuente {
-  id: string;
-  pregunta: string;
-  respuesta: string;
-}
-
 export const LISTA_FAQ: PreguntaFrecuente[] = [
   {
     id: "faq-1",
@@ -334,18 +306,6 @@ export const LISTA_FAQ: PreguntaFrecuente[] = [
     respuesta: "Atendemos requerimientos desde periodos semanales hasta proyectos de mediano y largo plazo (contratos mensuales o por temporada de obra), ofreciendo tarifas preferenciales para periodos extendidos."
   }
 ];
-
-export interface Testimonio {
-  id: string;
-  nombre: string;
-  cargo: string;
-  obra?: string;
-  empresa: string;
-  comentario: string;
-  sector: string;
-  imagen: string;
-  logoTipo?: "Zoomerr" | "ArtVenue" | "SmartFinder" | "SHELLS" | "kontrastr" | "WAVESMARATHON";
-}
 
 export const LISTA_TESTIMONIOS: Testimonio[] = [
   {
@@ -382,19 +342,6 @@ export const LISTA_TESTIMONIOS: Testimonio[] = [
     logoTipo: "SmartFinder"
   }
 ];
-
-export interface ArticuloBlog {
-  id: string;
-  slug: string;
-  titulo: string;
-  categoria: string;
-  fecha: string;
-  tiempoLectura: string;
-  autor: string;
-  resumen: string;
-  imagen: string;
-  contenido: string;
-}
 
 export const LISTA_BLOG: ArticuloBlog[] = [
   {

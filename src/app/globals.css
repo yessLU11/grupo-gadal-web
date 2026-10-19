@@ -1,3 +1,4 @@
+/* src/app/globals.css */
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -274,4 +275,90 @@
 
 .animate-marquee:hover {
   animation-play-state: paused;
+}
+
+@keyframes gearRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes gearRotateClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes gearRotateCounter {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes tractorDrive {
+  0% { transform: translateX(calc(-100vw - 100%)); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateX(calc(100vw + 100%)); opacity: 0; }
+}
+
+.mini-vehicles-track {
+  position: relative;
+  width: 100%;
+  height: 1.75rem;
+  overflow: hidden;
+}
+
+.mini-vehicles-track::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  border-top: 1px dashed rgba(33, 39, 42, 0.18);
+}
+
+.shadow-gear {
+  box-shadow: 0 10px 30px -5px rgba(33, 39, 42, 0.08), 0 0 15px rgba(250, 174, 52, 0.15);
+}
+
+.animate-gear-slow {
+  animation: gearRotateClockwise 40s linear infinite;
+}
+
+.animate-gear-reverse {
+  animation: gearRotateCounter 30s linear infinite;
+}
+
+.hover-elevate {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.hover-elevate:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 35px -10px rgba(33, 39, 42, 0.12), 0 0 20px rgba(250, 174, 52, 0.25);
+  border-color: rgba(250, 174, 52, 0.5);
+}
+
+.animate-tractor {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: -0.75rem;
+  color: #FAAE34;
+  animation: tractorDrive 8s linear infinite;
+}
+
+.animate-tractor-delayed {
+  animation-delay: -5s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-tractor {
+    animation: none;
+    transform: none;
+  }
+
+  .animate-tractor-delayed {
+    display: none;
+  }
 }
