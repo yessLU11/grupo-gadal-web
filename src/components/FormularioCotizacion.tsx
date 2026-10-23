@@ -154,17 +154,7 @@ export function FormularioCotizacion({
             >
               Alquiler de Maquinaria
             </button>
-            <button
-              type="button"
-              onClick={() => setValue("tipoOperacion", "Compra")}
-              className={`py-2.5 px-4 rounded-lg font-bold text-sm transition-all border ${
-                tipoOperacionActual === "Compra"
-                  ? "bg-[#21272A] text-white border-[#21272A]"
-                  : "bg-zinc-50 text-zinc-700 border-zinc-200 hover:bg-zinc-100"
-              }`}
-            >
-              Compra de Equipo
-            </button>
+          
           </div>
         </div>
       )}

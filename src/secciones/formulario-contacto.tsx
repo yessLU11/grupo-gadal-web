@@ -33,7 +33,7 @@ export function SeccionContacto() {
       <motion.div 
         animate={{ rotate: -360 }}
         transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
-        className="absolute top-40 -left-20 opacity-20 pointer-events-none z-0 text-[#21272A]"
+        className="absolute top-40 -left-20 opacity-10 pointer-events-none z-0 text-[#21272A]"
       >
         <Cog className="w-[350px] h-[350px]" />
       </motion.div>
@@ -42,7 +42,7 @@ export function SeccionContacto() {
       <motion.div 
         animate={{ rotate: 360 }}
         transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
-        className="absolute top-[48%] -right-16 opacity-20 pointer-events-none z-0 text-[#FAAE34]"
+        className="absolute top-[48%] -right-16 opacity-30 pointer-events-none z-0 text-[#FAAE34]"
       >
         <Cog className="w-[280px] h-[280px]" />
       </motion.div>
@@ -95,7 +95,7 @@ export function SeccionContacto() {
               >
                 <Truck className="w-6 h-6 text-[#FAAE34]" />
                 <span className="text-[11px] uppercase tracking-widest text-zinc-700 font-extrabold">
-                  GRUPO GADAL • MAQUINARIA PESADA EN MOVIMIENTO
+                  GRUPO GADAL • MAQUINARIA PESADA 
                 </span>
               </motion.div>
             </div>

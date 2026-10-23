@@ -1,5 +1,8 @@
 // src/components/EncabezadoSeccion.tsx
+"use client";
+
 import Image from "next/image";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 interface EncabezadoSeccionProps {
   titulo: string;
@@ -8,14 +11,32 @@ interface EncabezadoSeccionProps {
   alt?: string;
 }
 
+/**
+ * Encabezado de sección con efecto Parallax + Desaparición veloz.
+ *
+ * - Opacidad disminuye al hacer scroll.
+ * - Traslación vertical (parallax) y ligera reducción de escala.
+ * - Sticky para mantenerse visible al inicio de la página.
+ */
 export function EncabezadoSeccion({
   titulo,
   subtitulo,
   imagen,
   alt = "Maquinaria pesada GRUPO GADAL",
 }: EncabezadoSeccionProps) {
+  // Scroll progress (0‑1) of the viewport.
+  const { scrollYProgress } = useScroll();
+
+  // Transformations based on scroll progress.
+  const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+  const y = useTransform(scrollYProgress, [0, 0.3], [0, -50]); // move up 50px
+  const scale = useTransform(scrollYProgress, [0, 0.3], [1, 0.95]);
+
   return (
-    <section className="relative overflow-hidden py-14 sm:py-28 border-b border-zinc-200">
+    <motion.section
+      style={{ opacity, y, scale }}
+      className="will-change-transform sticky top-0 z-10 relative overflow-hidden py-14 sm:py-28 border-b border-zinc-200"
+    >
       <div
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat sm:bg-fixed"
         style={{ backgroundImage: `url(${imagen})` }}
@@ -35,6 +56,6 @@ export function EncabezadoSeccion({
           </p>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

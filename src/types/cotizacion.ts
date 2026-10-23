@@ -3,7 +3,7 @@
 
 import { Maquinaria } from "./maquinaria";
 
-export type TipoOperacion = "Alquiler" | "Compra";
+export type TipoOperacion = "Alquiler" ;
 
 export type EstadoCotizacion =
   | "pendiente"
