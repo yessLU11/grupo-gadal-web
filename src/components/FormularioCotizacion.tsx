@@ -154,17 +154,7 @@ export function FormularioCotizacion({
             >
               Alquiler de Maquinaria
             </button>
-            <button
-              type="button"
-              onClick={() => setValue("tipoOperacion", "Compra")}
-              className={`py-2.5 px-4 rounded-lg font-bold text-sm transition-all border ${
-                tipoOperacionActual === "Compra"
-                  ? "bg-[#21272A] text-white border-[#21272A]"
-                  : "bg-zinc-50 text-zinc-700 border-zinc-200 hover:bg-zinc-100"
-              }`}
-            >
-              Compra de Equipo
-            </button>
+          
           </div>
         </div>
       )}
@@ -356,24 +346,22 @@ export function FormularioCotizacion({
         </div>
       </div>
 
-      {/* Fila 5: Tipo de Maquinaria de Interés (Opcional o selector) */}
+
+      {/* Fila 5: Maquinarias de Interés (Entrada de texto libre) */}
       <div>
         <Label htmlFor="tipoMaquinaria" className="block mb-2">
-          Tipo de Maquinaria de Interés
+          Maquinarias de Interés
         </Label>
-        <select
+        <Input
           id="tipoMaquinaria"
+          type="text"
+          placeholder="Ej: Tractor de Oruga CAT D8T, Excavadora Hidráulica CAT 336, ..."
           {...register("tipoMaquinaria")}
           className="flex h-11 w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-[15px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FAAE34]"
-        >
-          <option value="">-- Seleccionar maquinaria o flota completa --</option>
-          <option value="Flota Integral Mixta">Flota Integral Mixta</option>
-          {LISTA_MAQUINARIAS.map((m) => (
-            <option key={m.id} value={m.nombre}>
-              {m.nombre} ({m.categoria})
-            </option>
-          ))}
-        </select>
+        />
+        <p className="mt-1 text-xs text-zinc-500">
+          Puedes ingresar varios equipos o tipos de maquinaria separados por coma.
+        </p>
       </div>
 
       {/* Fila 6: Mensaje */}

@@ -1,6 +1,8 @@
+// src/secciones/catalogo-equipos.tsx
 "use client";
 
 import React, { useState, useMemo } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { EncabezadoSeccion } from "@/components/EncabezadoSeccion";
 import Link from "next/link";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
@@ -13,8 +15,10 @@ import {
   X,
   RotateCcw,
   SlidersHorizontal,
-  ClipboardList, // <-- Agregar esta importación
-  ArrowRight
+  ClipboardList,
+  ArrowRight,
+  Cog,
+  Truck
 } from "lucide-react";
 
 export function CatalogoEquipos() {
@@ -23,6 +27,12 @@ export function CatalogoEquipos() {
   const pathname = usePathname();
 
   const [modalFiltrosMovil, setModalFiltrosMovil] = useState(false);
+
+  // Manejo de Scroll para Ocultar Velozmente el Encabezado
+  const { scrollY } = useScroll();
+  const headerOpacity = useTransform(scrollY, [0, 100], [1, 0]);
+  const headerY = useTransform(scrollY, [0, 100], [0, -50]);
+  const headerScale = useTransform(scrollY, [0, 100], [1, 0.96]);
 
   // Filtros desde la URL
   const sectorActual = searchParams.get("sector") || "todos";
@@ -78,7 +88,7 @@ export function CatalogoEquipos() {
   const hayFiltrosActivos =
     sectorActual !== "todos" || tipoActual !== "todos" || busquedaActual !== "";
 
-  // 1. AJUSTE DE COLORES EN EL INTERIOR DE LOS FILTROS
+  // Contenido reocupable de filtros
   const ContenidoFiltros = (
     <div className="space-y-5">
       {/* Buscador */}
@@ -166,20 +176,92 @@ export function CatalogoEquipos() {
     </div>
   );
 
-return (
-    <div className="bg-white">
-      <EncabezadoSeccion
-        titulo="Catálogo de Maquinaria"
-        subtitulo="Filtre por sector o tipo de equipo para encontrar la maquinaria que su frente de trabajo requiere."
-        imagen="/images/encabezado/encabezado-equipos.jpg"
+  return (
+    <div className="bg-white min-h-screen relative overflow-hidden text-[#21272A]">
+      
+      {/* 🌟 RESPLANDORES DE LUZ ÁMBAR DE FONDO */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-0 top-32 h-[500px] w-[500px] rounded-full bg-[#FAAE34]/15 blur-3xl z-0"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-0 top-[40%] h-[500px] w-[500px] rounded-full bg-[#FAAE34]/15 blur-3xl z-0"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-0 bottom-40 h-[500px] w-[500px] rounded-full bg-[#FAAE34]/15 blur-3xl z-0"
       />
 
-      {/* FONDO DE LA SECCIÓN GRIS */}
-      <div className="bg-zinc-100 py-10 sm:py-14 min-h-screen">
+      {/* ⚙️ ENGRANANJES INDUSTRIALES DE FONDO */}
+      <motion.div 
+        animate={{ rotate: 360 }}
+        transition={{ repeat: Infinity, duration: 45, ease: "linear" }}
+        className="absolute top-28 -left-28 opacity-15 pointer-events-none z-0 text-[#FAAE34]"
+      >
+        <Cog className="w-[520px] h-[520px]" />
+      </motion.div>
+
+      <motion.div 
+        animate={{ rotate: -360 }}
+        transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
+        className="absolute top-[30%] -right-20 opacity-10 pointer-events-none z-0 text-[#21272A]"
+      >
+        <Cog className="w-[320px] h-[320px]" />
+      </motion.div>
+
+      <motion.div 
+        animate={{ rotate: -360 }}
+        transition={{ repeat: Infinity, duration: 50, ease: "linear" }}
+        className="absolute bottom-20 -right-24 opacity-15 pointer-events-none z-0 text-[#21272A]"
+      >
+        <Cog className="w-[480px] h-[480px]" />
+      </motion.div>
+
+      {/* 1. ENCABEZADO CON PARALLAX Y DESAPARICIÓN RÁPIDA */}
+      <motion.div 
+        style={{ opacity: headerOpacity, y: headerY, scale: headerScale }}
+        className="will-change-transform sticky top-0 z-10"
+      >
+        <EncabezadoSeccion
+          titulo="Catálogo de Maquinaria"
+          subtitulo="Filtre por sector o tipo de equipo para encontrar la maquinaria que su frente de trabajo requiere."
+          imagen="/images/encabezado/encabezado-equipos.jpg"
+        />
+      </motion.div>
+
+      {/* 2. PISTA CON TRACTOR/CAMIÓN ANIMADO SOBRE EL CATÁLOGO */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 relative z-20">
+        <div className="h-9 bg-zinc-100 rounded-2xl border border-zinc-200/90 overflow-hidden flex items-center shadow-xs">
+          <motion.div
+            className="flex items-center gap-2 text-[#21272A] font-bold text-xs whitespace-nowrap"
+            animate={{ x: ["-100%", "100%"] }}
+            transition={{
+              repeat: Infinity,
+              duration: 9,
+              ease: "linear",
+            }}
+          >
+            <Truck className="w-5 h-5 text-[#FAAE34]" />
+            <span className="text-[10px] uppercase tracking-widest text-zinc-600 font-black">
+              FLOTA DISPONIBLE EN FAENA • INSPECCIÓN Y MANTENIMIENTO AL DÍA • GRUPO GADAL
+            </span>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* 3. SECCIÓN DE CONTENIDO Y FILTROS */}
+      <motion.section 
+        initial={{ opacity: 0, y: 30, scale: 0.99 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="py-10 sm:py-14 min-h-screen relative z-20"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          {/* Barra superior de control móvil */}
-          <div className="md:hidden flex items-center justify-between mb-6 bg-white p-3 rounded-xl border border-zinc-200 shadow-sm">
+          {/* Barra superior móvil */}
+          <div className="md:hidden flex items-center justify-between mb-6 bg-white p-3 rounded-xl border border-zinc-200/90 shadow-lg">
             <button
               onClick={() => setModalFiltrosMovil(true)}
               className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#FAAE34] text-[#21272A] font-bold text-sm shadow-sm"
@@ -196,12 +278,12 @@ return (
             </span>
           </div>
 
-          {/* Layout Principal */}
+          {/* Layout Principal (Sidebar + Grid) */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             
             {/* SIDEBAR DESKTOP */}
             <aside className="hidden md:block col-span-1">
-              <div className="sticky top-24 bg-white text-zinc-900 p-5 rounded-2xl border border-zinc-200 shadow-sm space-y-4">
+              <div className="sticky top-28 bg-white text-zinc-900 p-5 rounded-2xl border border-zinc-200/90 shadow-xl hover-elevate space-y-4">
                 <div className="flex items-center justify-between pb-3 border-b border-zinc-200">
                   <span className="font-bold text-zinc-900 text-xs uppercase tracking-wider flex items-center gap-2">
                     <SlidersHorizontal className="w-4 h-4 text-[#FAAE34]" />
@@ -221,9 +303,9 @@ return (
               </div>
             </aside>
 
-            {/* Grid de Maquinarias */}
-            <main className="col-span-1 md:col-span-3">
-              <div className="hidden md:flex items-center justify-between mb-6">
+            {/* GRID DE MAQUINARIAS */}
+            <main className="col-span-1 md:col-span-3 space-y-6">
+              <div className="hidden md:flex items-center justify-between">
                 <span className="text-sm font-semibold text-zinc-700">
                   Mostrando <strong className="text-[#21272A]">{equiposFiltrados.length}</strong> maquinaria(s)
                 </span>
@@ -247,12 +329,20 @@ return (
 
               {equiposFiltrados.length > 0 ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {equiposFiltrados.map((m) => (
-                    <TarjetaMaquinaria key={m.id} maquinaria={m} />
+                  {equiposFiltrados.map((m, idx) => (
+                    <motion.div
+                      key={m.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: idx * 0.05 }}
+                    >
+                      <TarjetaMaquinaria maquinaria={m} />
+                    </motion.div>
                   ))}
                 </div>
               ) : (
-                <div className="bg-white rounded-xl border border-zinc-200 p-12 text-center space-y-4 shadow-sm">
+                <div className="bg-white rounded-2xl border border-zinc-200/90 p-12 text-center space-y-4 shadow-xl">
                   <div className="w-16 h-16 rounded-full bg-zinc-100 text-zinc-400 flex items-center justify-center mx-auto">
                     <Search className="w-8 h-8" />
                   </div>
@@ -271,9 +361,15 @@ return (
                 </div>
               )}
 
-              {/* Banner inferior con botón de contacto corregido */}
-              <div className="mt-12 p-8 rounded-2xl bg-white border border-zinc-200 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left shadow-sm">
-                <div className="space-y-1">
+              {/* Banner Inferior B2B */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="p-8 rounded-2xl bg-white border border-zinc-200/90 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left shadow-xl hover-elevate relative overflow-hidden"
+              >
+                <div className="space-y-1 relative z-10">
                   <h3 className="text-xl font-bold text-[#21272A]">
                     ¿No encuentras la máquina específica que buscas?
                   </h3>
@@ -284,21 +380,21 @@ return (
                 
                 <Link
                   href="/contacto"
-                  className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#FAAE34] text-[#21272A] font-extrabold text-sm whitespace-nowrap shadow-sm btn-piston-hidraulico"
+                  className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#FAAE34] text-[#21272A] font-extrabold text-sm whitespace-nowrap shadow-md btn-piston-hidraulico relative z-10"
                 >
                   <ClipboardList className="w-5 h-5" />
                   Consultar Ahora
                   <ArrowRight className="w-4 h-4" />
                 </Link>
-              </div>
+              </motion.div>
             </main>
           </div>
         </div>
 
-        {/* Modal Móvil */}
+        {/* Modal Filtros Móvil */}
         {modalFiltrosMovil && (
-          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-sm p-0 sm:p-4">
-            <div className="w-full sm:max-w-md bg-white rounded-t-2xl sm:rounded-2xl p-6 max-h-[85vh] overflow-y-auto space-y-5 animate-in slide-in-from-bottom">
+          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm p-0 sm:p-4">
+            <div className="w-full sm:max-w-md bg-white rounded-t-2xl sm:rounded-2xl p-6 max-h-[85vh] overflow-y-auto space-y-5 animate-in slide-in-from-bottom border border-zinc-200">
               <div className="flex items-center justify-between pb-3 border-b border-zinc-200">
                 <span className="font-bold text-base text-[#21272A]">
                   Filtros de Catálogo
@@ -316,7 +412,7 @@ return (
               <div className="pt-3 border-t border-zinc-200 flex gap-3">
                 <button
                   onClick={() => setModalFiltrosMovil(false)}
-                  className="flex-1 py-3 rounded-lg bg-[#FAAE34] text-[#21272A] font-extrabold text-sm text-center"
+                  className="flex-1 py-3 rounded-xl bg-[#FAAE34] text-[#21272A] font-extrabold text-sm text-center"
                 >
                   Ver {equiposFiltrados.length} Equipos
                 </button>
@@ -324,7 +420,7 @@ return (
             </div>
           </div>
         )}
-      </div>
+      </motion.section>
     </div>
   );
 }

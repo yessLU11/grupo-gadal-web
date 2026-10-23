@@ -4,7 +4,8 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useCarritoStore, ItemCotizacion } from "@/lib/estado-carrito";
+import { useCarritoStore } from "@/lib/estado-carrito";
+import type { ItemCotizacion } from "@/types";
 import {
   FormularioCotizacion,
   DatosFormularioCotizacion,
@@ -323,7 +324,7 @@ export function CarritoCotizacion() {
                             {item.maquinaria.capacidad} • {item.maquinaria.potenciaHp} HP
                           </span>
 
-                          {/* Toggle Operación: Alquiler / Compra */}
+                          {/* Toggle Operación: Alquiler */}
                           <div className="flex items-center gap-2 mb-2">
                             <span className="text-[11px] text-zinc-500 font-medium">Modo:</span>
                             <div className="inline-flex rounded border border-zinc-200 p-0.5 text-xs">
@@ -339,19 +340,6 @@ export function CarritoCotizacion() {
                                 }`}
                               >
                                 Alquiler
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() =>
-                                  actualizarTipoOperacion(item.id, "Compra")
-                                }
-                                className={`px-2 py-0.5 rounded font-semibold ${
-                                  item.tipoOperacion === "Compra"
-                                    ? "bg-[#21272A] text-white"
-                                    : "text-zinc-600"
-                                }`}
-                              >
-                                Compra
                               </button>
                             </div>
                           </div>

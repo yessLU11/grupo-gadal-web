@@ -2,46 +2,33 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { useInView } from "framer-motion";
 
 interface ContadorDinamicoProps {
   valorFinal: number;
-  duracion?: number; // en milisegundos
+  duracion?: number; // Duración total de la animación en milisegundos
   prefijo?: string;
   sufijo?: string;
+  decimales?: number; // Cantidad de decimales a mostrar (por defecto 0)
   className?: string;
 }
 
 export function ContadorDinamico({
   valorFinal,
-  duracion = 2000,
+  duracion = 2200,
   prefijo = "",
   sufijo = "",
+  decimales = 0,
   className = "",
 }: ContadorDinamicoProps) {
   const [cuenta, setCuenta] = useState(0);
-  const [iniciado, setIniciado] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
+  
+  // hook de Framer Motion para detectar cuando el contador entra en el viewport
+  const estaEnVista = useInView(ref, { once: true, margin: "-50px" });
 
   useEffect(() => {
-    const elemento = ref.current;
-    if (!elemento) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        if (entry.isIntersecting && !iniciado) {
-          setIniciado(true);
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    observer.observe(elemento);
-    return () => observer.disconnect();
-  }, [iniciado]);
-
-  useEffect(() => {
-    if (!iniciado) return;
+    if (!estaEnVista) return;
 
     let inicioTiempo: number | null = null;
     let animacionId: number;
@@ -49,9 +36,10 @@ export function ContadorDinamico({
     const animar = (tiempoActual: number) => {
       if (!inicioTiempo) inicioTiempo = tiempoActual;
       const progreso = Math.min((tiempoActual - inicioTiempo) / duracion, 1);
-      // Función de aceleración suave (easeOutExpo)
-      const easeOut = progreso === 1 ? 1 : 1 - Math.pow(2, -10 * progreso);
-      const valorCalculado = Math.floor(easeOut * valorFinal);
+
+      // Función de atenuación suave profesional (easeOutQuart)
+      const easeOut = 1 - Math.pow(1 - progreso, 4);
+      const valorCalculado = easeOut * valorFinal;
 
       setCuenta(valorCalculado);
 
@@ -64,12 +52,21 @@ export function ContadorDinamico({
 
     animacionId = requestAnimationFrame(animar);
     return () => cancelAnimationFrame(animacionId);
-  }, [iniciado, valorFinal, duracion]);
+  }, [estaEnVista, valorFinal, duracion]);
+
+  // Formatear el valor calculado según el número de decimales
+  const valorFormateado = cuenta.toLocaleString("es-PE", {
+    minimumFractionDigits: decimales,
+    maximumFractionDigits: decimales,
+  });
 
   return (
-    <span ref={ref} className={className}>
+    <span
+      ref={ref}
+      className={`font-extrabold tracking-tight tabular-nums transition-all ${className}`}
+    >
       {prefijo}
-      {cuenta.toLocaleString("es-PE")}
+      {valorFormateado}
       {sufijo}
     </span>
   );

@@ -17,7 +17,7 @@ export function NotificacionCotizarFlotante() {
       setVisible(true);
     }, 12000);
 
-    // Luego repetir cada 60 segundos si está cerrado
+    // Luego repetir cada 5 minutos si está cerrado
     const intervalo = setInterval(() => {
       setVisible((prev) => {
         if (!descartado && !prev) {
@@ -25,7 +25,7 @@ export function NotificacionCotizarFlotante() {
         }
         return prev;
       });
-    }, 60000);
+    }, 300000);
 
     return () => {
       clearTimeout(primerTimer);

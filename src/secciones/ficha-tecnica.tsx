@@ -4,7 +4,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Maquinaria, LISTA_MAQUINARIAS } from "@/lib/datos-mock";
+import { motion } from "framer-motion";
+import type { Maquinaria } from "@/types";
+import { LISTA_MAQUINARIAS } from "@/lib/datos-mock";
 import { useCarritoStore } from "@/lib/estado-carrito";
 import { TarjetaMaquinaria } from "@/components/TarjetaMaquinaria";
 import { Badge } from "@/components/ui/badge";
@@ -12,12 +14,19 @@ import {
   ChevronRight,
   Check,
   Plus,
-  Phone,
+  Download,
   ShieldCheck,
   FileText,
   Truck,
   Wrench,
-  CheckCircle2
+  CheckCircle2,
+  Cog,
+  ArrowRight,
+  Clock,
+  Zap,
+  Scale,
+  Layers,
+  Fuel
 } from "lucide-react";
 
 interface PropsFicha {
@@ -43,29 +52,96 @@ export function FichaTecnica({ maquinaria }: PropsFicha) {
     setTimeout(() => setAgregadoReciente(false), 2500);
   };
 
-  const mensajeWhatsApp = `Hola GRUPO GADAL, deseo cotizar el alquiler del equipo: ${maquinaria.nombre} (Modelo ${maquinaria.modelo}). ¿Me podrían enviar tarifas por favor?`;
-  const urlWhatsApp = `https://wa.me/51962335073?text=${encodeURIComponent(mensajeWhatsApp)}`;
+  const descargarPDF = () => {
+    window.print();
+  };
 
   return (
-    <div className="bg-zinc-50/50 py-10 sm:py-14 min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="bg-white min-h-screen relative overflow-hidden text-[#21272A] py-10 sm:py-14">
+      
+      {/* 🌟 RESPLANDORES DE LUZ ÁMBAR DE FONDO */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-0 top-32 h-[500px] w-[500px] rounded-full bg-[#FAAE34]/15 blur-3xl z-0"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-0 top-[35%] h-[500px] w-[500px] rounded-full bg-[#FAAE34]/15 blur-3xl z-0"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-0 bottom-40 h-[500px] w-[500px] rounded-full bg-[#FAAE34]/15 blur-3xl z-0"
+      />
+
+      {/* ⚙️ ENGRANANJES INDUSTRIALES DE FONDO */}
+      <motion.div 
+        animate={{ rotate: 360 }}
+        transition={{ repeat: Infinity, duration: 45, ease: "linear" }}
+        className="absolute top-28 -left-28 opacity-15 pointer-events-none z-0 text-[#FAAE34]"
+      >
+        <Cog className="w-[520px] h-[520px]" />
+      </motion.div>
+
+      <motion.div 
+        animate={{ rotate: -360 }}
+        transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
+        className="absolute top-[35%] -right-20 opacity-10 pointer-events-none z-0 text-[#21272A]"
+      >
+        <Cog className="w-[320px] h-[320px]" />
+      </motion.div>
+
+      <motion.div 
+        animate={{ rotate: -360 }}
+        transition={{ repeat: Infinity, duration: 50, ease: "linear" }}
+        className="absolute bottom-20 -right-24 opacity-15 pointer-events-none z-0 text-[#21272A]"
+      >
+        <Cog className="w-[480px] h-[480px]" />
+      </motion.div>
+
+      {/* CONTENIDO PRINCIPAL */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
+        
         {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-xs text-zinc-500 mb-8 overflow-x-auto whitespace-nowrap pb-1">
-          <Link href="/" className="hover:text-[#21272A]">Inicio</Link>
+        <nav className="flex items-center gap-2 text-xs text-zinc-500 mb-6 overflow-x-auto whitespace-nowrap pb-1">
+          <Link href="/" className="hover:text-[#FAAE34] transition-colors">Inicio</Link>
           <ChevronRight className="w-3.5 h-3.5" />
-          <Link href="/equipos" className="hover:text-[#21272A]">Catálogo</Link>
+          <Link href="/equipos" className="hover:text-[#FAAE34] transition-colors">Catálogo</Link>
           <ChevronRight className="w-3.5 h-3.5" />
           <span className="text-zinc-400">{maquinaria.categoria}</span>
           <ChevronRight className="w-3.5 h-3.5" />
           <span className="font-bold text-[#21272A]">{maquinaria.nombre}</span>
         </nav>
 
-        {/* Bloque Superior: Galería y Acciones de Cotización */}
-        <div className="bg-white rounded-2xl border border-zinc-200 p-6 sm:p-8 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-          {/* Galería de Imágenes (7 cols en desktop) */}
+        {/* 🚜 PISTA DE TRACTOR EN MOVIMIENTO */}
+        <div className="h-9 bg-zinc-100 rounded-2xl border border-zinc-200/90 overflow-hidden flex items-center shadow-xs mb-8">
+          <motion.div
+            className="flex items-center gap-2 text-[#21272A] font-bold text-xs whitespace-nowrap"
+            animate={{ x: ["-100%", "100%"] }}
+            transition={{
+              repeat: Infinity,
+              duration: 8,
+              ease: "linear",
+            }}
+          >
+            <Truck className="w-5 h-5 text-[#FAAE34]" />
+            <span className="text-[10px] uppercase tracking-widest text-zinc-600 font-black">
+              DISPONIBILIDAD INMEDIATA • ESPECIFICACIONES TÉCNICAS COMPLETAS • GRUPO GADAL
+            </span>
+          </motion.div>
+        </div>
+
+        {/* BLOQUE SUPERIOR: GALERÍA Y COTIZACIÓN */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30, scale: 0.99 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="bg-white rounded-3xl border border-zinc-200/90 p-6 sm:p-8 shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 hover-elevate relative overflow-hidden"
+        >
+          {/* Galería de Imágenes (7 cols) */}
           <div className="lg:col-span-7 space-y-4">
             {/* Imagen Principal */}
-            <div className="relative w-full h-72 sm:h-96 rounded-xl overflow-hidden bg-zinc-100 border border-zinc-200">
+            <div className="relative w-full h-72 sm:h-96 rounded-2xl overflow-hidden bg-zinc-100 border border-zinc-200/80 shadow-sm">
               <Image
                 src={imagenSeleccionada}
                 alt={maquinaria.nombre}
@@ -92,7 +168,7 @@ export function FichaTecnica({ maquinaria }: PropsFicha) {
                   <button
                     key={idx}
                     onClick={() => setImagenSeleccionada(img)}
-                    className={`relative w-20 h-16 sm:w-24 sm:h-20 rounded-lg overflow-hidden border-2 transition-all shrink-0 ${
+                    className={`relative w-20 h-16 sm:w-24 sm:h-20 rounded-xl overflow-hidden border-2 transition-all shrink-0 ${
                       imagenSeleccionada === img
                         ? "border-[#FAAE34] ring-2 ring-[#FAAE34]/40 scale-105"
                         : "border-zinc-200 opacity-70 hover:opacity-100"
@@ -110,7 +186,7 @@ export function FichaTecnica({ maquinaria }: PropsFicha) {
             )}
           </div>
 
-          {/* Información y Botones de Compra/Cotización (5 cols) */}
+          {/* Información y Botones de Cotización (5 cols) */}
           <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
             <div className="space-y-4">
               <div>
@@ -129,16 +205,50 @@ export function FichaTecnica({ maquinaria }: PropsFicha) {
                 {maquinaria.descripcionCompleta}
               </p>
 
-              {/* Aspectos destacados rápidos */}
-              <div className="grid grid-cols-2 gap-3 pt-2">
-                <div className="p-3 rounded-lg bg-[#F1F1F1] text-xs">
-                  <span className="text-zinc-500 block">Potencia Neta</span>
-                  <span className="font-bold text-[#21272A] text-sm">{maquinaria.potenciaHp} HP</span>
+              {/* Grid Rápido de Rendimiento (4 Campos) */}
+              <div className="grid grid-cols-2 gap-2.5 pt-2">
+                <div className="p-3 rounded-xl bg-zinc-50 border border-zinc-200/80 text-xs shadow-xs flex items-center gap-2.5">
+                  <Zap className="w-4 h-4 text-[#FAAE34] shrink-0" />
+                  <div>
+                    <span className="text-zinc-500 block text-[10px]">Potencia Neta</span>
+                    <span className="font-extrabold text-[#21272A] text-xs sm:text-sm">{maquinaria.potenciaHp} HP</span>
+                  </div>
                 </div>
-                <div className="p-3 rounded-lg bg-[#F1F1F1] text-xs">
-                  <span className="text-zinc-500 block">Peso Operativo</span>
-                  <span className="font-bold text-[#21272A] text-sm">{(maquinaria.pesoOperativoKg / 1000).toFixed(1)} Toneladas</span>
+
+                <div className="p-3 rounded-xl bg-zinc-50 border border-zinc-200/80 text-xs shadow-xs flex items-center gap-2.5">
+                  <Scale className="w-4 h-4 text-[#FAAE34] shrink-0" />
+                  <div>
+                    <span className="text-zinc-500 block text-[10px]">Peso Operativo</span>
+                    <span className="font-extrabold text-[#21272A] text-xs sm:text-sm">{(maquinaria.pesoOperativoKg / 1000).toFixed(1)} t</span>
+                  </div>
                 </div>
+
+                <div className="p-3 rounded-xl bg-zinc-50 border border-zinc-200/80 text-xs shadow-xs flex items-center gap-2.5">
+                  <Layers className="w-4 h-4 text-[#FAAE34] shrink-0" />
+                  <div>
+                    <span className="text-zinc-500 block text-[10px]">Capacidad</span>
+                    <span className="font-extrabold text-[#21272A] text-xs sm:text-sm truncate max-w-[110px] block">{maquinaria.capacidad}</span>
+                  </div>
+                </div>
+
+                <div className="p-3 rounded-xl bg-zinc-50 border border-zinc-200/80 text-xs shadow-xs flex items-center gap-2.5">
+                  <Fuel className="w-4 h-4 text-[#FAAE34] shrink-0" />
+                  <div>
+                    <span className="text-zinc-500 block text-[10px]">Combustible</span>
+                    <span className="font-extrabold text-[#21272A] text-xs sm:text-sm">{maquinaria.especificaciones.combustible}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Caja Transparente de Tarifas Estimadas */}
+              <div className="p-3.5 rounded-xl bg-amber-500/10 border border-[#FAAE34]/40 flex items-center justify-between text-xs">
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-[#FAAE34]" />
+                  <span className="font-bold text-[#21272A]">Modalidad de Contrato:</span>
+                </div>
+                <span className="font-extrabold text-[#21272A] bg-white px-2.5 py-1 rounded-md border border-zinc-200 shadow-2xs">
+                  Hora / Día / Mes B2B
+                </span>
               </div>
             </div>
 
@@ -146,10 +256,10 @@ export function FichaTecnica({ maquinaria }: PropsFicha) {
             <div className="pt-6 border-t border-zinc-200 space-y-3">
               <button
                 onClick={manejarAgregar}
-                className={`w-full py-3.5 px-6 rounded-lg font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-md ${
+                className={`w-full py-3.5 px-6 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-md ${
                   agregadoReciente
                     ? "bg-emerald-600 text-white"
-                    : "bg-[#FAAE34] hover:bg-[#e99e28] text-[#21272A]"
+                    : "bg-[#FAAE34] hover:bg-[#e99e28] text-[#21272A] btn-piston-hidraulico"
                 }`}
               >
                 {agregadoReciente ? (
@@ -165,34 +275,40 @@ export function FichaTecnica({ maquinaria }: PropsFicha) {
                 )}
               </button>
 
-              <a
-                href={urlWhatsApp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-3 px-6 rounded-lg border-2 border-emerald-600 text-emerald-700 hover:bg-emerald-50 font-bold text-sm flex items-center justify-center gap-2 transition-colors"
+              {/* 📄 BOTÓN DESCARGAR FICHA TÉCNICA PDF EN LUGAR DE WHATSAPP */}
+              <button
+                onClick={descargarPDF}
+                type="button"
+                className="w-full py-3 px-6 rounded-xl border border-zinc-300 bg-zinc-50 hover:bg-zinc-100 text-[#21272A] font-bold text-sm flex items-center justify-center gap-2 transition-colors shadow-xs"
               >
-                <Phone className="w-4 h-4 text-emerald-600" />
-                Consultar Disponibilidad por WhatsApp
-              </a>
+                <Download className="w-4 h-4 text-[#FAAE34]" />
+                Descargar Ficha Técnica (PDF)
+              </button>
 
               <div className="pt-3 flex items-center justify-between text-xs text-zinc-500 border-t border-zinc-100">
-                <span className="flex items-center gap-1.5">
+                <span className="flex items-center gap-1.5 font-medium">
                   <ShieldCheck className="w-4 h-4 text-[#FAAE34]" />
                   Inspección pre-entrega
                 </span>
-                <span className="flex items-center gap-1.5">
+                <span className="flex items-center gap-1.5 font-medium">
                   <Truck className="w-4 h-4 text-[#FAAE34]" />
                   Despacho nacional
                 </span>
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Ficha Técnica: Tabla de Especificaciones y Aplicaciones */}
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* TABLA DE ESPECIFICACIONES Y APLICACIONES */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8"
+        >
           {/* Tabla de Especificaciones Técnicas (2 cols) */}
-          <div className="lg:col-span-2 bg-white rounded-2xl border border-zinc-200 p-6 sm:p-8 shadow-sm">
+          <div className="lg:col-span-2 bg-white rounded-3xl border border-zinc-200/90 p-6 sm:p-8 shadow-xl hover-elevate">
             <div className="flex items-center gap-3 mb-6 pb-3 border-b border-zinc-100">
               <FileText className="w-5 h-5 text-[#FAAE34]" />
               <h2 className="text-[20px] md:text-[22px] font-bold text-[#21272A]">
@@ -242,7 +358,7 @@ export function FichaTecnica({ maquinaria }: PropsFicha) {
 
           {/* Aplicaciones Recomendadas y Condiciones de Servicio (1 col) */}
           <div className="space-y-6">
-            <div className="bg-white rounded-2xl border border-zinc-200 p-6 shadow-sm">
+            <div className="bg-white rounded-3xl border border-zinc-200/90 p-6 shadow-xl hover-elevate">
               <h3 className="text-base font-bold text-[#21272A] mb-4">
                 Aplicaciones en Obra
               </h3>
@@ -256,27 +372,34 @@ export function FichaTecnica({ maquinaria }: PropsFicha) {
               </ul>
             </div>
 
-            <div className="bg-[#F9F2E6] rounded-2xl border border-[#FAAE34]/60 p-6 shadow-sm space-y-3">
+            <div className="bg-white rounded-3xl border border-zinc-200/90 p-6 shadow-xl space-y-3 hover-elevate relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-2 h-full bg-[#FAAE34]" />
               <div className="flex items-center gap-2 text-[#21272A] font-bold text-sm">
                 <Wrench className="w-4 h-4 text-[#FAAE34]" />
                 Condiciones de Alquiler B2B
               </div>
-              <p className="text-xs text-zinc-700 leading-relaxed">
+              <p className="text-xs text-zinc-600 leading-relaxed">
                 Contratos flexibles por mes o por campaña. Soporte técnico en sitio para resolución de incidencias. Opciones de transporte en cama baja puerta a puerta.
               </p>
               <Link
                 href="/carrito"
-                className="inline-block text-xs font-bold text-[#21272A] underline hover:text-amber-800"
+                className="inline-flex items-center gap-1 text-xs font-bold text-[#21272A] hover:text-[#FAAE34] transition-colors"
               >
-                Configurar requerimiento en el carrito →
+                Configurar requerimiento en el carrito <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Sección: Equipos Relacionados */}
+        {/* SECCIÓN: EQUIPOS RELACIONADOS */}
         {equiposRelacionados.length > 0 && (
-          <div className="mt-16 pt-12 border-t border-zinc-200">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="mt-16 pt-12 border-t border-zinc-200"
+          >
             <div className="mb-8">
               <span className="text-[12px] md:text-[13px] font-bold uppercase tracking-wider text-[#FAAE34] block mb-1">
                 Complemente su Flota
@@ -291,8 +414,9 @@ export function FichaTecnica({ maquinaria }: PropsFicha) {
                 <TarjetaMaquinaria key={m.id} maquinaria={m} />
               ))}
             </div>
-          </div>
+          </motion.div>
         )}
+
       </div>
     </div>
   );
