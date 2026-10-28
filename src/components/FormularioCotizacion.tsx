@@ -38,6 +38,7 @@ export const esquemaCotizacion = z
       .regex(/^[0-9]+$/, "Solo se permiten dígitos numéricos"),
     tipoOperacion: z.enum(["Alquiler", "Compra"]),
     tipoMaquinaria: z.string().optional(),
+    equipoAdicional: z.string().optional(),
     mensaje: z.string().optional(),
   })
   .refine(
@@ -89,6 +90,7 @@ export function FormularioCotizacion({
       celular: "",
       tipoOperacion: "Alquiler",
       tipoMaquinaria: maquinariaPreseleccionada || "",
+      equipoAdicional: "",
       mensaje: "",
     },
   });
@@ -138,17 +140,15 @@ export function FormularioCotizacion({
     >
       {/* Selector de Tipo de Operación (si aplica, p.ej. en Carrito) */}
       {mostrarTipoOperacion && (
-        <div className="space-y-2 pb-2 border-b border-zinc-100">
-          <Label className="text-xs uppercase font-bold text-zinc-500 tracking-wider">
-            Tipo de Operación *
-          </Label>
+        <div className="space-y-2 pb-2 border-b border-[#21272A]/10">
+          
           <div className="grid grid-cols-2 gap-3">
             <button
               type="button"
               onClick={() => setValue("tipoOperacion", "Alquiler")}
               className={`py-2.5 px-4 rounded-lg font-bold text-sm transition-all border ${
                 tipoOperacionActual === "Alquiler"
-                  ? "bg-[#21272A] text-white border-[#21272A]"
+                  ? "bg-[#FAAE34] text-white/95 border-[#FAAE34]"
                   : "bg-zinc-50 text-zinc-700 border-zinc-200 hover:bg-zinc-100"
               }`}
             >
@@ -162,7 +162,7 @@ export function FormularioCotizacion({
       {/* Fila 1: Toggle Documento y Número */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div>
-          <Label className="block mb-2 text-xs uppercase font-bold text-zinc-500">
+          <Label className="block mb-2 text-xs uppercase font-bold text-[#21272A]">
             Tipo de Documento *
           </Label>
           <div className="flex rounded-md border border-zinc-300 p-1 bg-zinc-50">
@@ -173,7 +173,7 @@ export function FormularioCotizacion({
               }}
               className={`flex-1 py-1.5 rounded text-xs font-bold transition-all ${
                 tipoDocumentoActual === "RUC"
-                  ? "bg-[#FAAE34] text-[#21272A] shadow-sm"
+                  ? "bg-[#FAAE34] text-[#FFFFFF] shadow-sm"
                   : "text-zinc-600 hover:text-black"
               }`}
             >
@@ -187,7 +187,7 @@ export function FormularioCotizacion({
               }}
               className={`flex-1 py-1.5 rounded text-xs font-bold transition-all ${
                 tipoDocumentoActual === "DNI"
-                  ? "bg-[#FAAE34] text-[#21272A] shadow-sm"
+                  ? "bg-[#FAAE34] text-[#FFFFFF] shadow-sm"
                   : "text-zinc-600 hover:text-black"
               }`}
             >
@@ -347,28 +347,61 @@ export function FormularioCotizacion({
       </div>
 
 
-      {/* Fila 5: Maquinarias de Interés (Entrada de texto libre) */}
-      <div>
-        <Label htmlFor="tipoMaquinaria" className="block mb-2">
-          Maquinarias de Interés
-        </Label>
-        <Input
-          id="tipoMaquinaria"
-          type="text"
-          placeholder="Ej: Tractor de Oruga CAT D8T, Excavadora Hidráulica CAT 336, ..."
-          {...register("tipoMaquinaria")}
-          className="flex h-11 w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-[15px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FAAE34]"
-        />
-        <p className="mt-1 text-xs text-zinc-500">
-          Puedes ingresar varios equipos o tipos de maquinaria separados por coma.
-        </p>
-      </div>
+      {/* Fila 5: Maquinaria adicional o de interés */}
+      {mostrarTipoOperacion ? (
+        <div>
+          <Label htmlFor="equipoAdicional" className="block mb-2">
+            Maquinaria adicional
+          </Label>
+          <Input
+            id="equipoAdicional"
+            type="text"
+            placeholder="Ej.: motoniveladora, rodillo compactador"
+            {...register("equipoAdicional")}
+            className="flex h-11 w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-[15px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FAAE34]"
+          />
+          <p className="mt-1 text-xs text-zinc-500">
+            ¿Buscas un equipo que no encontraste en el catálogo? Indícalo aquí.
+          </p>
+        </div>
+      ) : (
+        <div>
+          <Label htmlFor="tipoMaquinaria" className="block mb-2">
+            Maquinarias de Interés
+          </Label>
+          <Input
+            id="tipoMaquinaria"
+            type="text"
+            placeholder="Ej: Tractor de Oruga CAT D8T, Excavadora Hidráulica CAT 336, ..."
+            {...register("tipoMaquinaria")}
+            className="flex h-11 w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-[15px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FAAE34]"
+          />
+          <p className="mt-1 text-xs text-zinc-500">
+            Puedes ingresar varios equipos o tipos de maquinaria separados por coma.
+          </p>
+        </div>
+      )}
 
       {/* Fila 6: Mensaje */}
       <div>
         <Label htmlFor="mensaje" className="block mb-2">
           Detalle del Requerimiento o Ubicación de Obra
         </Label>
+        {mostrarTipoOperacion && (
+          <div className="mb-3 flex gap-3 rounded-xl border border-[#FAAE34]/40 bg-amber-50/80 p-3.5 text-sm text-[#21272A]">
+            <ShieldCheck
+              aria-hidden="true"
+              className="mt-0.5 h-5 w-5 shrink-0 text-[#D88C0A]"
+            />
+            <p className="leading-relaxed">
+              <span className="font-bold">
+                Una obra bien descrita, una tarifa más precisa.
+              </span>{" "}
+              Cuéntanos la duración, el tipo de terreno y el soporte que necesitas
+              para preparar una propuesta más competitiva.
+            </p>
+          </div>
+        )}
         <Textarea
           id="mensaje"
           rows={3}

@@ -19,43 +19,21 @@ export function SeccionContacto() {
     <div className="bg-slate-50/70 min-h-screen pb-16 lg:pb-24 overflow-hidden relative">
       
       {/* ⚙️ ENGRANANJES INDUSTRIALES DE FONDO (VISIBLES) */}
-      
-      {/* Engranaje Ámbar Gigante - Superior Derecho */}
-      <motion.div 
-        animate={{ rotate: 360 }}
-        transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
-        className="absolute -top-12 -right-24 opacity-25 pointer-events-none z-0 text-[#FAAE34]"
-      >
-        <Cog className="w-[480px] h-[480px]" />
-      </motion.div>
 
-      {/* Engranaje Oscuro - Superior Izquierdo */}
-      <motion.div 
-        animate={{ rotate: -360 }}
-        transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
-        className="absolute top-40 -left-20 opacity-10 pointer-events-none z-0 text-[#21272A]"
-      >
-        <Cog className="w-[350px] h-[350px]" />
-      </motion.div>
-
-      {/* Engranaje Ámbar Intermedio - Centro/Derecho */}
-      <motion.div 
-        animate={{ rotate: 360 }}
-        transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
-        className="absolute top-[48%] -right-16 opacity-30 pointer-events-none z-0 text-[#FAAE34]"
-      >
-        <Cog className="w-[280px] h-[280px]" />
-      </motion.div>
-
-      {/* Engranaje Oscuro Inferior - Izquierda de Abajo */}
-      <motion.div 
-        animate={{ rotate: -360 }}
-        transition={{ repeat: Infinity, duration: 50, ease: "linear" }}
-        className="absolute bottom-10 -left-28 opacity-25 pointer-events-none z-0 text-[#21272A]"
-      >
-        <Cog className="w-[500px] h-[500px]" />
-      </motion.div>
-
+ 
+      {/* 🌟 RESPLANDORES DE LUZ ÁMBAR DE FONDO */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-0 top-32 h-[500px] w-[500px] rounded-full bg-[#FAAE34]/15 blur-3xl z-0"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-0 top-[35%] h-[500px] w-[500px] rounded-full bg-[#FAAE34]/15 blur-3xl z-0"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-0 bottom-40 h-[500px] w-[500px] rounded-full bg-[#FAAE34]/15 blur-3xl z-0"
+      />
 
       {/* Encabezado con efecto Parallax y Desaparición Veloz */}
       <motion.div 
