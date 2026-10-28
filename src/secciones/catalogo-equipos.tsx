@@ -186,11 +186,11 @@ export function CatalogoEquipos() {
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute right-0 top-[40%] h-[500px] w-[500px] rounded-full bg-[#FAAE34]/15 blur-3xl z-0"
+        className="pointer-events-none absolute right-0 top-[40%] h-[400px] w-[400px] rounded-full bg-[#FAAE34]/15 blur-3xl z-0"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-0 bottom-40 h-[500px] w-[500px] rounded-full bg-[#FAAE34]/15 blur-3xl z-0"
+        className="pointer-events-none absolute left-0 bottom-40 h-[300px] w-[300px] rounded-full bg-[#FAAE34]/15 blur-3xl z-0"
       />
 
       {/* ⚙️ ENGRANANJES INDUSTRIALES DE FONDO */}
@@ -202,21 +202,6 @@ export function CatalogoEquipos() {
         <Cog className="w-[520px] h-[520px]" />
       </motion.div>
 
-      <motion.div 
-        animate={{ rotate: -360 }}
-        transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
-        className="absolute top-[30%] -right-20 opacity-10 pointer-events-none z-0 text-[#21272A]"
-      >
-        <Cog className="w-[320px] h-[320px]" />
-      </motion.div>
-
-      <motion.div 
-        animate={{ rotate: -360 }}
-        transition={{ repeat: Infinity, duration: 50, ease: "linear" }}
-        className="absolute bottom-20 -right-24 opacity-15 pointer-events-none z-0 text-[#21272A]"
-      >
-        <Cog className="w-[480px] h-[480px]" />
-      </motion.div>
 
       {/* 1. ENCABEZADO CON PARALLAX Y DESAPARICIÓN RÁPIDA */}
       <motion.div 

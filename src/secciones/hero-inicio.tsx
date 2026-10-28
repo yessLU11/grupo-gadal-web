@@ -82,14 +82,6 @@ export function HeroInicio() {
         className="pointer-events-none absolute right-0 bottom-0 h-[500px] w-[500px] rounded-full bg-[#FAAE34]/15 blur-3xl z-10"
       />
 
-      {/* ⚙️ ENGRANANJES INDUSTRIALES ANIMADOS EN EL FONDO */}
-      <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ repeat: Infinity, duration: 50, ease: "linear" }}
-        className="absolute -right-24 -top-24 opacity-15 pointer-events-none z-10 text-[#FAAE34]"
-      >
-        <Cog className="w-[580px] h-[580px]" />
-      </motion.div>
 
       {/* CARRUSEL DE IMÁGENES DE FONDO CON CINEMATIC GRADIENT */}
       {diapositivas.map((d, i) => (
@@ -156,26 +148,19 @@ export function HeroInicio() {
             <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
               <Link
                 href="/equipos"
-                className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-[#FAAE34] text-[#21272A] font-black text-sm btn-piston-hidraulico shadow-xl active:scale-95"
+                className="group inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-[#FAAE34] text-[#21272A] font-black text-sm btn-piston-hidraulico shadow-xl transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(250,174,52,0.3)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#21272A] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
               >
-                Explorar Catálogo ({diapositivas.length * 2}+ Equipos)
-                <ArrowRight className="w-4 h-4" />
+                Explorar Catálogo
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0" />
               </Link>
               
-              <Link
-                href="/contacto"
-                className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl border border-zinc-500 text-white font-extrabold text-sm bg-zinc-900/80 backdrop-blur-md hover:bg-white hover:text-[#21272A] transition-all shadow-md"
-              >
-                Cotización Rápida
-                <ChevronRight className="w-4 h-4" />
-              </Link>
             </div>
 
             {/* Garantes / Social Proof Rápidos */}
             <div className="pt-6 border-t border-zinc-800/90 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-bold text-zinc-300">
               <div className="flex items-center gap-2 bg-black/30 p-2.5 rounded-lg border border-zinc-800/60 backdrop-blur-xs">
                 <CheckCircle2 className="w-4 h-4 text-[#FAAE34] shrink-0" />
-                <span>Atención directa sin intermediarios</span>
+                <span>Atención directa</span>
               </div>
               <div className="flex items-center gap-2 bg-black/30 p-2.5 rounded-lg border border-zinc-800/60 backdrop-blur-xs">
                 <MapPin className="w-4 h-4 text-[#FAAE34] shrink-0" />
@@ -198,20 +183,16 @@ export function HeroInicio() {
                 animate={{ opacity: 1, scale: 1, x: 0 }}
                 exit={{ opacity: 0, scale: 0.95, x: -20 }}
                 transition={{ duration: 0.5 }}
-                className="bg-white/95 backdrop-blur-md rounded-3xl p-5 border border-zinc-200 shadow-2xl text-[#21272A] space-y-4 relative hover-elevate"
+                className="bg-black/65s backdrop-blur-md rounded-3xl p-5 border border-zinc-200 shadow-2xl text-[#21272A] space-y-4 relative hover-elevate"
               >
                 {/* Badge Flotante Superior */}
                 <div className="flex items-center justify-between pb-3 border-b border-zinc-100">
                   <div className="flex items-center gap-2">
                     <Sparkles className="w-4 h-4 text-[#FAAE34]" />
-                    <span className="text-xs font-black uppercase tracking-wider text-[#21272A]">
-                      EQUIPO EN FAENA DESTACADO
+                    <span className="text-xs font-black uppercase tracking-wider text-[#FAAE34]">
+                      EQUIPO DESTACADO
                     </span>
                   </div>
-                  <span className="px-2.5 py-1 rounded-full text-[10px] font-black uppercase bg-emerald-600 text-white flex items-center gap-1 shadow-xs">
-                    <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                    DISPONIBLE
-                  </span>
                 </div>
 
                 {/* Imagen del Equipo */}
@@ -222,43 +203,21 @@ export function HeroInicio() {
                     fill
                     className="object-cover object-center"
                   />
-                  <div className="absolute bottom-2 left-2 bg-black/80 backdrop-blur-md text-white text-[11px] font-bold px-2.5 py-1 rounded-lg">
-                    Código Flota: MAQ-0{activo + 1}
-                  </div>
+                 
                 </div>
 
                 {/* Detalles Rápidos */}
                 <div>
-                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#FAAE34] block">
-                    LÍNEA AMARILLA HEAVY-DUTY
-                  </span>
-                  <h3 className="text-lg font-black text-[#21272A]">
+                  <h3 className="text-lg font-black text-[#FFFFFF] leading-snug">
                     {slide.equipoDestacado.nombre}
                   </h3>
                 </div>
 
-                {/* Grid de Especificaciones Mini */}
-                <div className="grid grid-cols-2 gap-2 pt-1">
-                  <div className="p-2.5 rounded-xl bg-zinc-100/90 border border-zinc-200/80 text-xs">
-                    <span className="text-[10px] text-zinc-500 block font-medium">Potencia Neta</span>
-                    <span className="font-black text-[#21272A] text-xs flex items-center gap-1">
-                      <Zap className="w-3.5 h-3.5 text-[#FAAE34]" />
-                      {slide.equipoDestacado.potencia}
-                    </span>
-                  </div>
-
-                  <div className="p-2.5 rounded-xl bg-zinc-100/90 border border-zinc-200/80 text-xs">
-                    <span className="text-[10px] text-zinc-500 block font-medium">Capacidad / Peso</span>
-                    <span className="font-black text-[#21272A] text-xs">
-                      {slide.equipoDestacado.capacidad}
-                    </span>
-                  </div>
-                </div>
 
                 {/* CTA Inmediato de Ficha Técnica */}
                 <Link
                   href="/equipos"
-                  className="w-full py-3 px-4 rounded-xl bg-[#21272A] hover:bg-black text-[#FAAE34] font-extrabold text-xs flex items-center justify-center gap-2 transition-colors shadow-md"
+                  className="w-full py-3 px-4 rounded-xl bg-[#000000]/40 hover:bg-black text-[#FAAE34] font-extrabold text-xs flex items-center justify-center gap-2 transition-colors shadow-md"
                 >
                   <Clock className="w-4 h-4 text-[#FAAE34]" />
                   Reserva o Cotiza este equipo en 1 Clic →
@@ -280,7 +239,7 @@ export function HeroInicio() {
           >
             <Truck className="w-5 h-5 text-[#FAAE34]" />
             <span className="text-[10px] uppercase tracking-widest text-zinc-400 font-black">
-              ALQUILER POR HORAS, DÍAS O CAMPANAS COMPLETAS • ASESORÍA Y LOGÍSTICA INCLUIDA • GRUPO GADAL
+              ALQUILER POR HORAS, DÍAS O CAMPAÑAS COMPLETAS • ASESORÍA Y LOGÍSTICA INCLUIDA • GRUPO GADAL
             </span>
           </motion.div>
         </div>
