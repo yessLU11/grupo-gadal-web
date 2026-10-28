@@ -3,7 +3,8 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { LISTA_TESTIMONIOS, Testimonio } from "@/lib/datos-mock";
+import { LISTA_TESTIMONIOS } from "@/lib/datos-mock";
+import type { Testimonio } from "@/types";
 import { ChevronLeft, ChevronRight, Star, Zap } from "lucide-react";
 
 // Logos referenciales de clientes para el banner móvil (Ticker / Marquee)
@@ -73,7 +74,9 @@ export function TestimoniosSeccion() {
   const testimonio: Testimonio = LISTA_TESTIMONIOS[indiceActual];
 
   return (
+
     <section className="bg-white overflow-hidden">
+      
       {/* 1. BANNER QUE SE MUEVE (Ticker Marquee en fondo Ámbar #FAAE34) */}
       <div className="bg-[#FAAE34] py-5 overflow-hidden shadow-inner select-none border-y border-amber-400">
         <div className="animate-marquee flex items-center gap-12 sm:gap-20">
@@ -151,7 +154,7 @@ export function TestimoniosSeccion() {
                     {testimonio.cargo}
                     {testimonio.obra && (
                       <span className="text-xs sm:text-sm font-semibold text-zinc-500 text-center sm:text-right">
-                        {testimonio.obra}
+                        
                       </span>
                     )}
                   </p>

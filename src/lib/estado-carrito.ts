@@ -3,21 +3,16 @@
 
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import { Maquinaria } from "./datos-mock";
+import type { Maquinaria, ItemCotizacion, TipoOperacion } from "@/types";
 
-export interface ItemCotizacion {
-  id: string; // id único del item
-  maquinaria: Maquinaria;
-  cantidad: number;
-  tipoOperacion: "Alquiler" | "Compra";
-}
+export type { ItemCotizacion };
 
 interface EstadoCarrito {
   items: ItemCotizacion[];
-  agregarEquipo: (maquinaria: Maquinaria, tipoOperacion?: "Alquiler" | "Compra") => void;
+  agregarEquipo: (maquinaria: Maquinaria, tipoOperacion?: "Alquiler") => void;
   eliminarEquipo: (id: string) => void;
   actualizarCantidad: (id: string, cantidad: number) => void;
-  actualizarTipoOperacion: (id: string, tipoOperacion: "Alquiler" | "Compra") => void;
+  actualizarTipoOperacion: (id: string, tipoOperacion: "Alquiler") => void;
   limpiarCarrito: () => void;
   obtenerTotalItems: () => number;
 }
