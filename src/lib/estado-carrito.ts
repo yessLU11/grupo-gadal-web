@@ -9,10 +9,10 @@ export type { ItemCotizacion };
 
 interface EstadoCarrito {
   items: ItemCotizacion[];
-  agregarEquipo: (maquinaria: Maquinaria, tipoOperacion?: "Alquiler" | "Compra") => void;
+  agregarEquipo: (maquinaria: Maquinaria, tipoOperacion?: "Alquiler") => void;
   eliminarEquipo: (id: string) => void;
   actualizarCantidad: (id: string, cantidad: number) => void;
-  actualizarTipoOperacion: (id: string, tipoOperacion: "Alquiler" | "Compra") => void;
+  actualizarTipoOperacion: (id: string, tipoOperacion: "Alquiler") => void;
   limpiarCarrito: () => void;
   obtenerTotalItems: () => number;
 }
